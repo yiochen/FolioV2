@@ -38,6 +38,7 @@ html(lang="en")
             
             
             iron-media-query(query="(min-width: 1000px)",query-matches="{{desktop}}")
+            include ./_menu.jade
             neon-animated-pages#pages(
                 selected="[[selected]]",
                 entry-animation="[[entryAnimation]]",

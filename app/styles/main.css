@@ -4,8 +4,19 @@ body {
   background: #fafafa;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: white;
+    overflow-y:hidden;
 }
-
+.menu_header{
+    display:flex;
+    justify-content: space-between;
+    
+    height:20px;
+    margin-bottom:20px;
+}
+.menu_title{
+   font-size: 2em;
+    
+}
 .main_page{
     color:white;
     height: 100vh;
@@ -30,16 +41,9 @@ body {
 
 .toolbar{
     height:40px;
-   
     position:absolute;
     width:100%;
- 
-    
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 59%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.1) 59%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.1) 59%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
-
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.1) 59%,rgba(0,0,0,0) 100%); 
 }
 .toolbar .toolbar_icon{
     color:white;

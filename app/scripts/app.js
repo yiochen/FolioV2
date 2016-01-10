@@ -61,11 +61,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   };
   app._onMenuClick = function() {
       if (app.menuOpen){
-          app.$.menu_button.shape="cancel";
-          app.menuOpen = false;
-      }else{
+          // closing the menu
           app.$.menu_button.shape="menu";
+          app.menuOpen = false;
+          app.$.menu_popout.close();
+      }else{
+          //opening the menu
+          app.$.menu_button.shape="cancel";
           app.menuOpen = true;
+          app.$.menu_popout.open();
       }
         
   }
