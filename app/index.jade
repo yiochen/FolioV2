@@ -1,0 +1,53 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(name="description",content="")
+        meta(
+            name="viewport",
+            content="width=device-width, initial-scale=1")
+        title Yiou's personal site
+        meta(name="theme-color",content="#2E3AA1")
+        link(rel="mainfest", href="manifest.json")
+        meta(name="msapplication-TileColor",content="#3372DF")
+        meta(name="mobile-web-app-capable",content="yes")
+        link(rel="stylesheet", href="styles/normalize.css")
+        link(rel="stylesheet",href="styles/skeleton.css")
+        link(rel="stylesheet", href="styles/main.css")
+        
+        script(src="../bower_components/webcomponentsjs/webcomponents-lite.js")
+        link(rel="import", href="elements/elements.html")
+        style(is="custom-style", include="shared-styles")
+    body.fullbleed.layout.vertical(unresolved)
+        span#browser-sync-binding
+        template#app(is="dom-bind")
+            //- paper-drawer-panel#paperDrawerPanel
+            //-     paper-scroll-header-panel(drawer,fixed)
+            //-         paper-toolbar#drawerToolbar
+            //-             span.paper-font-title Menu
+            //-         paper-menu.list(attr-for-selected="data-route", selected="[[route]]")
+            //-             a(data-route="home",href="{{baseUrl}}")
+            //-                 iron-icon(icon="home")
+            //-                 span Home
+            //-             a(data-route="users",href="{{baseUrl}}users")
+            //-                 iron-icon(icon="info")
+            //-                 span Users
+            //-             a(data-route="contact",href="{{baseUrl}}contact")
+            //-                 iron-icon(icon="mail")
+            //-                 span Contact
+            
+            
+            iron-media-query(query="(min-width: 1000px)",query-matches="{{desktop}}")
+            neon-animated-pages#pages(
+                selected="[[selected]]",
+                entry-animation="[[entryAnimation]]",
+                exit-animation="[[exitAnimation]]")  
+                include ./_mainpage.jade
+                include ./_project-tmood.jade
+                include ./_aboutme.jade
+            .toolbar 
+                .toolbar_icon a
+                .toolbar_title Yiou Chen
+                .open_menu_button
+                    shape-shifter#menu_button(shape="menu",color="#fff",on-tap="_onMenuClick")
+        script(src="scripts/app.js")            

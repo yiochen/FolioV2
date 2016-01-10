@@ -1,0 +1,36 @@
+<!-- shared styles for all elements and index.html -->
+<dom-module id="shared-styles">
+    <template>
+        <style>
+        .page-title {
+            @apply(--paper-font-display2);
+            color:black;
+        }
+
+        paper-menu a > *, paper-menu paper-item > *, paper-menu paper-icon-item > * {
+            pointer-events: none;
+        }
+
+        neon-animatable{
+            width:100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background:#4C4252;
+        }
+
+        .landing{
+            background:url(../images/me_vertical_02.png);
+            
+            background-size: cover;
+            background-position: center;
+        }
+            
+        @media (min-width: 1000px) {
+            .landing {
+                background:url(../images/me_horizontal.png)
+            }
+        }
+
+        </style>
+    </template>
+</dom-module>
