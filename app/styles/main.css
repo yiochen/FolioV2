@@ -1,10 +1,23 @@
-
+/*
+gradient from uigradient.com
+Cheer Up Emo Kid
+Colour 1: #556270
+Colour 2: #FF6B6B
+*/
 
 body {
   background: #fafafa;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: white;
     overflow-y:hidden;
+}
+.gradient_overlay{
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background: linear-gradient(135deg, rgba(255,107,107,0.7) 0%,rgba(85,98,112,0.7) 100%);
 }
 .menu_header{
     display:flex;
@@ -27,7 +40,6 @@ body {
     position: absolute;
     bottom: 0;
     right:0;
-    color:red;
 }
 
 @media (min-width: 1000px) {
@@ -71,6 +83,7 @@ body {
     display:flex;
     align-items: center;
     justify-content: center;
+    margin-right:20px;
 }
 .project_page{
     color:white;
