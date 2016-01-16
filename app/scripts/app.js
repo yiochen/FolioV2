@@ -7,113 +7,122 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-(function(document) {
-  'use strict';
+(function (document) {
+    'use strict';
+    var $ = function (selector) {
+        return document.querySelector(selector);
+    };
+    // Grab a reference to our auto-binding template
+    // and give it some initial binding values
+    // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
+    var app = document.querySelector('#app');
 
-  // Grab a reference to our auto-binding template
-  // and give it some initial binding values
-  // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
-  var app = document.querySelector('#app');
+    // Sets app default base URL
+    app.baseUrl = '/';
+    app.selected = 0;
+    app.menuOpen = false;
+    if (window.location.port === '') { // if production
+        // Uncomment app.baseURL below and
+        // set app.baseURL to '/your-pathname/' if running from folder in production
+        // app.baseUrl = '/polymer-starter-kit/';
+    }
 
-  // Sets app default base URL
-  app.baseUrl = '/';
-  app.selected=0;
-  app.menuOpen=false;
-  if (window.location.port === '') {  // if production
-    // Uncomment app.baseURL below and
-    // set app.baseURL to '/your-pathname/' if running from folder in production
-    // app.baseUrl = '/polymer-starter-kit/';
-  }
+    // app.displayInstalledToast = function() {
+    //   // Check to make sure caching is actually enabled—it won't be in the dev environment.
+    //   if (!Polymer.dom(document).querySelector('platinum-sw-cache').disabled) {
+    //     Polymer.dom(document).querySelector('#caching-complete').show();
+    //   }
+    // };
 
-  // app.displayInstalledToast = function() {
-  //   // Check to make sure caching is actually enabled—it won't be in the dev environment.
-  //   if (!Polymer.dom(document).querySelector('platinum-sw-cache').disabled) {
-  //     Polymer.dom(document).querySelector('#caching-complete').show();
-  //   }
-  // };
+    // Listen for template bound event to know when bindings
+    // have resolved and content has been stamped to the page
+    app.addEventListener('dom-change', function () {
+        console.log('Our app is ready to rock!');
+        $('ending-element').addEventListener('ending-event', function () {
+            $('.unresolved').classList.remove('unresolved');
+            var preloader = $('.preloading');
+            preloader.parentNode.removeChild(preloader);
+            console.log('all elements upgraded');
+        });
+    });
 
-  // Listen for template bound event to know when bindings
-  // have resolved and content has been stamped to the page
-  app.addEventListener('dom-change', function() {
-    console.log('Our app is ready to rock!');
-  });
-
-
-  app._onPrevClick = function() {
+    app._onPrevClick = function () {
         this.entryAnimation = 'slide-from-left-animation';
         this.exitAnimation = 'slide-right-animation';
-        var selected=this.selected;
+        var selected = this.$.pages.selected;
         selected--;
-        if (selected<0) {
-            selected=app.$.pages.children.length-1;
+        if (selected < 0) {
+            selected = this.$.pages.children.length - 1;
         }
-        this.selected = selected;
-  };
-  app._onNextClick = function() {
+        this.$.pages.selected = selected;
+    };
+    app._onNextClick = function () {
         this.entryAnimation = 'slide-from-right-animation';
         this.exitAnimation = 'slide-left-animation';
-        var selected=this.selected;
+        var selected = this.$.pages.selected;
+        console.log("selected from " + selected)
         selected++;
-        if (selected>=app.$.pages.children.length){
-            selected=0;
+        if (selected >= this.$.pages.children.length) {
+            selected = 0;
         }
-        this.selected = selected;
-  };
-  app._onMenuClick = function() {
-      if (app.menuOpen){
-          // closing the menu
-          app.$.menu_button.shape="menu";
-          app.menuOpen = false;
-          app.$.menu_popout.close();
-      }else{
-          //opening the menu
-          app.$.menu_button.shape="cancel";
-          app.menuOpen = true;
-          app.$.menu_popout.open();
-      }
-        
-  }
-  // See https://github.com/Polymer/polymer/issues/1381
-  window.addEventListener('WebComponentsReady', function() {
-    // imports are loaded and elements have been registered
-  });
+        this.$.pages.selected = selected;
+        console.log("selected to " + selected)
+    };
+    app._onMenuClick = function () {
+            if (this.menuOpen) {
+                // closing the menu
+                this.$.menu_button.shape = "menu";
+                this.menuOpen = false;
+                $('#menu_popout').close();
+            } else {
+                //opening the menu
+                this.$.menu_button.shape = "cancel";
+                this.menuOpen = true;
+                $('#menu_popout').open();
+            }
 
-  // Main area's paper-scroll-header-panel custom condensing transformation of
-  // the appName in the middle-container and the bottom title in the bottom-container.
-  // The appName is moved to top and shrunk on condensing. The bottom sub title
-  // is shrunk to nothing on condensing.
-  // window.addEventListener('paper-header-transform', function(e) {
-  //   var appName = Polymer.dom(document).querySelector('#mainToolbar .app-name');
-  //   var middleContainer = Polymer.dom(document).querySelector('#mainToolbar .middle-container');
-  //   var bottomContainer = Polymer.dom(document).querySelector('#mainToolbar .bottom-container');
-  //   var detail = e.detail;
-  //   var heightDiff = detail.height - detail.condensedHeight;
-  //   var yRatio = Math.min(1, detail.y / heightDiff);
-  //   // appName max size when condensed. The smaller the number the smaller the condensed size.
-  //   var maxMiddleScale = 0.50;
-  //   var auxHeight = heightDiff - detail.y;
-  //   var auxScale = heightDiff / (1 - maxMiddleScale);
-  //   var scaleMiddle = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
-  //   var scaleBottom = 1 - yRatio;
-  //
-  //   // Move/translate middleContainer
-  //   Polymer.Base.transform('translate3d(0,' + yRatio * 100 + '%,0)', middleContainer);
-  //
-  //   // Scale bottomContainer and bottom sub title to nothing and back
-  //   Polymer.Base.transform('scale(' + scaleBottom + ') translateZ(0)', bottomContainer);
-  //
-  //   // Scale middleContainer appName
-  //   Polymer.Base.transform('scale(' + scaleMiddle + ') translateZ(0)', appName);
-  // });
+        }
+        // See https://github.com/Polymer/polymer/issues/1381
+    window.addEventListener('WebComponentsReady', function () {
+        // imports are loaded and elements have been registered
+    });
 
-  // Scroll page to top and expand header
-  app.scrollPageToTop = function() {
-    //app.$.pages.scrollToTop(true);
-    console.log("scrolling to top...faking it up")
-  };
+    // Main area's paper-scroll-header-panel custom condensing transformation of
+    // the appName in the middle-container and the bottom title in the bottom-container.
+    // The appName is moved to top and shrunk on condensing. The bottom sub title
+    // is shrunk to nothing on condensing.
+    // window.addEventListener('paper-header-transform', function(e) {
+    //   var appName = Polymer.dom(document).querySelector('#mainToolbar .app-name');
+    //   var middleContainer = Polymer.dom(document).querySelector('#mainToolbar .middle-container');
+    //   var bottomContainer = Polymer.dom(document).querySelector('#mainToolbar .bottom-container');
+    //   var detail = e.detail;
+    //   var heightDiff = detail.height - detail.condensedHeight;
+    //   var yRatio = Math.min(1, detail.y / heightDiff);
+    //   // appName max size when condensed. The smaller the number the smaller the condensed size.
+    //   var maxMiddleScale = 0.50;
+    //   var auxHeight = heightDiff - detail.y;
+    //   var auxScale = heightDiff / (1 - maxMiddleScale);
+    //   var scaleMiddle = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
+    //   var scaleBottom = 1 - yRatio;
+    //
+    //   // Move/translate middleContainer
+    //   Polymer.Base.transform('translate3d(0,' + yRatio * 100 + '%,0)', middleContainer);
+    //
+    //   // Scale bottomContainer and bottom sub title to nothing and back
+    //   Polymer.Base.transform('scale(' + scaleBottom + ') translateZ(0)', bottomContainer);
+    //
+    //   // Scale middleContainer appName
+    //   Polymer.Base.transform('scale(' + scaleMiddle + ') translateZ(0)', appName);
+    // });
 
-  app.closeDrawer = function() {
-    // app.$.paperDrawerPanel.closeDrawer();
-  };
+    // Scroll page to top and expand header
+    app.scrollPageToTop = function () {
+        //app.$.pages.scrollToTop(true);
+        console.log("scrolling to top...faking it up")
+    };
+
+    app.closeDrawer = function () {
+        // app.$.paperDrawerPanel.closeDrawer();
+    };
 
 })(document);

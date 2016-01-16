@@ -15,40 +15,52 @@ html(lang="en")
         link(rel="stylesheet",href="styles/skeleton.css")
         link(rel="stylesheet", href="styles/main.css")
         
-        script(src="../bower_components/webcomponentsjs/webcomponents-lite.js")
-        link(rel="import", href="elements/elements.html")
+        
+        link(rel="import",href="styles/shared-styles.html")
         style(is="custom-style", include="shared-styles")
-    body.fullbleed.layout.vertical(unresolved)
-        span#browser-sync-binding
-        template#app(is="dom-bind")
-            //- paper-drawer-panel#paperDrawerPanel
-            //-     paper-scroll-header-panel(drawer,fixed)
-            //-         paper-toolbar#drawerToolbar
-            //-             span.paper-font-title Menu
-            //-         paper-menu.list(attr-for-selected="data-route", selected="[[route]]")
-            //-             a(data-route="home",href="{{baseUrl}}")
-            //-                 iron-icon(icon="home")
-            //-                 span Home
-            //-             a(data-route="users",href="{{baseUrl}}users")
-            //-                 iron-icon(icon="info")
-            //-                 span Users
-            //-             a(data-route="contact",href="{{baseUrl}}contact")
-            //-                 iron-icon(icon="mail")
-            //-                 span Contact
-            
-            
-            iron-media-query(query="(min-width: 1000px)",query-matches="{{desktop}}")
-            include ./_menu.jade
-            neon-animated-pages#pages(
-                selected="[[selected]]",
-                entry-animation="[[entryAnimation]]",
-                exit-animation="[[exitAnimation]]")  
-                include ./_mainpage.jade
-                include ./_project-tmood.jade
-                include ./_aboutme.jade
-            .toolbar 
-                .toolbar_icon a
-                .toolbar_title Yiou Chen
-                .open_menu_button
-                    shape-shifter#menu_button(shape="menu",color="#fff",on-tap="_onMenuClick")
-        script(src="scripts/app.js")            
+        script(src="../bower_components/webcomponentsjs/webcomponents-lite.js")
+        link(rel="import", href="elements/elements.html" async)
+        
+        
+    body
+        .preloading Hello I am loading
+        .fullbleed.layout.vertical.unresolved        
+            template#app(is="dom-bind")
+                //slow-element
+                
+                //- paper-drawer-panel#paperDrawerPanel
+                //-     paper-scroll-header-panel(drawer,fixed)
+                //-         paper-toolbar#drawerToolbar
+                //-             span.paper-font-title Menu
+                //-         paper-menu.list(attr-for-selected="data-route", selected="[[route]]")
+                //-             a(data-route="home",href="{{baseUrl}}")
+                //-                 iron-icon(icon="home")
+                //-                 span Home
+                //-             a(data-route="users",href="{{baseUrl}}users")
+                //-                 iron-icon(icon="info")
+                //-                 span Users
+                //-             a(data-route="contact",href="{{baseUrl}}contact")
+                //-                 iron-icon(icon="mail")
+                //-                 span Contact
+
+
+                iron-media-query(query="(min-width: 1000px)",query-matches="{{desktop}}")
+                include ./_menu.jade
+                neon-animated-pages#pages(
+                    selected="0",
+                    entry-animation="[[entryAnimation]]",
+                    exit-animation="[[exitAnimation]]")  
+                    include ./_mainpage.jade
+                    include ./_project-tmood.jade
+                    include ./_aboutme.jade
+                .toolbar 
+                    .toolbar_icon a
+                    .toolbar_title Yiou Chen
+                    .open_menu_button
+                        shape-shifter#menu_button(shape="menu",color="#fff",on-tap="_onMenuClick")
+                .left_arrow
+                    paper-icon-button(icon="chevron-left",on-tap="_onPrevClick")
+                .right_arrow
+                    paper-icon-button(icon="chevron-right", on-tap="_onNextClick")
+                ending-element
+            script(src="scripts/app.js")            

@@ -1,0 +1,26 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<dom-module id="ending-element">
+    <template>
+        <style>
+            :host {
+                display: hidden;
+            }
+        </style>
+    </template>
+
+    <script>
+        (function () {
+            'use strict';
+
+            Polymer({
+                is: 'ending-element',
+                created: function () {
+                    console.log("ending element loading");
+                    this.fire("ending-event");
+                }
+            });
+        })();
+    </script>
+
+</dom-module>

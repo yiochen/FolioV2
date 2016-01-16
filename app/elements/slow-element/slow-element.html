@@ -1,0 +1,24 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<dom-module id="slow-element">
+    <script>
+        (function () {
+            'use strict';
+            Polymer({
+                is: 'slow-element',
+                created: function () {
+                    console.log("start loading");
+                    var start = Date.now();
+                    console.log("time is " + start);
+                    while (true) {
+                        if (Date.now() - start > 5000) {
+                            break;
+                        }
+                    }
+                    console.log("finish loading, time is " + Date.now());
+                }
+            });
+        })();
+    </script>
+
+</dom-module>
