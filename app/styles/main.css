@@ -137,7 +137,7 @@ body {
 .project_preview {
     background: orange;
     height: 75vh;
-    box-sizing: border-box;
+    box-sizing: content-box;
     position: relative;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%);
     clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%);
@@ -180,18 +180,131 @@ body {
     bottom: 0;
 }
 
+.fullheight {
+    height: 100vh;
+    width: 100%;
+    float: left;
+}
+
 .aboutme_profile {
     height: 100px;
     width: 100px;
     overflow: hidden;
     border-radius: 50%;
-    margin: 80px auto;
+    margin: 0 auto;
+    margin-top: 50vh;
+    transform: translateY(-50px);
+}
+
+.aboutme_astronaut {
+    position: absolute;
+    width: 650px;
+    margin-left: 50%;
+    margin-top: 50vh;
+    transform: translate(-370px, -151px);
+    opacity: 0.4;
+}
+
+.about_title {
+    text-align: center;
+}
+
+.about_main {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 10px 47px -15px rgba(0, 0, 0, 0.75);
+}
+
+.about_intro .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.about_skill {
+    background: green;
+}
+
+.about_skill .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
+}
+
+.about_skill .about_comfortable {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.about_skill .about_comfortable>h4:first-child {
+    min-width: 200px;
+    margin: 20px 0;
+}
+
+.about_skill .about_comfortable>div {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.about_skill .about_comfortable .comfort_item {
+    display: flex;
+    align-items: stretch;
+    padding-left: 20px;
+}
+
+.about_skill .about_comfortable .comfort_item p {
+    align-self: center;
+    margin-bottom: 0;
+}
+
+@media (min-width: 1000px) {
+    .about_skill .about_comfortable .comfort_item {
+        flex: 1;
+    }
+}
+
+.about_skill .about_comfortable .comfort_item iron-icon {
+    margin-right: 20px;
+    height: 60px;
+    width: 60px;
+}
+
+.about_language {
+    margin-top: 20px;
+}
+
+.about_language i {
+    padding: 20px;
+    font-size: 60px;
+}
+
+.about_contact {}
+
+.about_contact .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.about_contact h4 {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.about_contact .social_icons {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
 }
 
 .aboutme_profile img {
     max-width: 100%;
     width: 100%;
 }
+
+.aboutme_astronaut {}
 
 html {
     overflow-y: auto;

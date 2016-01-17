@@ -1,12 +1,3 @@
-/*
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/
-
 (function (document) {
     'use strict';
     var $ = function (selector) {
@@ -17,8 +8,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
     var app = document.querySelector('#app');
 
+    HTMLImports.whenReady(function () {
+        $('.unresolved').classList.remove('unresolved');
+        var preloader = $('.preloading');
+        preloader.parentNode.removeChild(preloader);
+        console.log('all elements upgraded, all html imports finished');
+    });
+
     // Sets app default base URL
-    app.baseUrl = '/';
+    app.baseUrl = 'http://0.0.0.0:8000/app/';
     app.selected = 0;
     app.menuOpen = false;
     if (window.location.port === '') { // if production
@@ -38,35 +36,48 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     // have resolved and content has been stamped to the page
     app.addEventListener('dom-change', function () {
         console.log('Our app is ready to rock!');
-        $('ending-element').addEventListener('ending-event', function () {
-            $('.unresolved').classList.remove('unresolved');
-            var preloader = $('.preloading');
-            preloader.parentNode.removeChild(preloader);
-            console.log('all elements upgraded');
-        });
     });
 
     app._onPrevClick = function () {
         this.entryAnimation = 'slide-from-left-animation';
         this.exitAnimation = 'slide-right-animation';
         var selected = this.$.pages.selected;
+        this.$.pages.children[selected].scrollTop = 0;
         selected--;
         if (selected < 0) {
             selected = this.$.pages.children.length - 1;
         }
         this.$.pages.selected = selected;
+        this.$.pages.children[selected].scrollTop = 0;
     };
     app._onNextClick = function () {
         this.entryAnimation = 'slide-from-right-animation';
         this.exitAnimation = 'slide-left-animation';
         var selected = this.$.pages.selected;
-        console.log("selected from " + selected)
+        this.$.pages.children[selected].scrollTop = 0;
         selected++;
         if (selected >= this.$.pages.children.length) {
             selected = 0;
         }
         this.$.pages.selected = selected;
-        console.log("selected to " + selected)
+        this.$.pages.children[selected].scrollTop = 0;
+    };
+    app._onChangeSelected = function (route) {
+        this.entryAnimation = "fade-in-animation";
+        this.exitAnimation = "fade-out-animation";
+        var selected = this.$.pages.selected;
+        this.$.pages.children[selected].scrollTop = 0;
+        var newpage = this.$.pages.querySelector("[data-route='" + route + "']");
+        //TODO: following will alert message for routing error. In production. This should be handled in a user friendly way
+        if (newpage == null) {
+            alert("Cannot find the requested page");
+            return;
+        }
+
+        selected = this.$.pages.indexOf(newpage);
+        this.$.pages.children[selected].scrollTop = 0;
+        this.$.pages.selected = selected;
+
     };
     app._onMenuClick = function () {
             if (this.menuOpen) {
@@ -115,14 +126,5 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     //   Polymer.Base.transform('scale(' + scaleMiddle + ') translateZ(0)', appName);
     // });
 
-    // Scroll page to top and expand header
-    app.scrollPageToTop = function () {
-        //app.$.pages.scrollToTop(true);
-        console.log("scrolling to top...faking it up")
-    };
-
-    app.closeDrawer = function () {
-        // app.$.paperDrawerPanel.closeDrawer();
-    };
 
 })(document);
