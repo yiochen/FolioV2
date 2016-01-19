@@ -19,6 +19,9 @@ body {
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: white;
     /*    overflow-y: hidden;*/
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
 .gradient_overlay {

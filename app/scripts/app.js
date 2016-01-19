@@ -13,6 +13,18 @@
         var preloader = $('.preloading');
         preloader.parentNode.removeChild(preloader);
         console.log('all elements upgraded, all html imports finished');
+        var hammertime = new Hammer(app.$.pages);
+        hammertime.get('swipe').set({
+            direction: Hammer.DIRECTION_HORIZONTAL
+        });
+        hammertime.on('swipeleft', function (ev) {
+            console.log('swipeleft');
+            app._onNextClick();
+        });
+        hammertime.on('swiperight', function (ev) {
+            console.log('swiperight')
+            app._onPrevClick();
+        })
     });
 
     // Sets app default base URL

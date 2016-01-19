@@ -7,9 +7,9 @@ html(lang="en")
             name="viewport",
             content="width=device-width, initial-scale=1")
         title Yiou's personal site
-        meta(name="theme-color",content="#2E3AA1")
+        meta(name="theme-color",content="#D37773")
         link(rel="mainfest", href="manifest.json")
-        meta(name="msapplication-TileColor",content="#3372DF")
+        meta(name="msapplication-TileColor",content="#D37773")
         meta(name="mobile-web-app-capable",content="yes")
         link(rel="stylesheet", href="styles/normalize.css")
         link(rel="stylesheet",href="styles/skeleton.css")
@@ -58,9 +58,7 @@ html(lang="en")
                     .toolbar_title Yiou Chen
                     .open_menu_button
                         shape-shifter#menu_button(shape="menu",color="#fff",on-tap="_onMenuClick")
-                .left_arrow
-                    paper-icon-button(icon="chevron-left",on-tap="_onPrevClick")
-                .right_arrow
-                    paper-icon-button(icon="chevron-right", on-tap="_onNextClick")
+               
                 ending-element
+            script(src="scripts/hammer.min.js")
             script(src="scripts/app.js")            

@@ -250,7 +250,7 @@ gulp.task('clean', function () {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['styles', 'elements', 'images'], function () {
+gulp.task('serve', ['jade', 'styles', 'elements', 'images'], function () {
     browserSync({
         port: 5000,
         notify: false,
@@ -275,7 +275,7 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
             }
         }
     });
-
+    gulp.watch(['app/*.jade'], dojade);
     gulp.watch(['app/**/*.html'], reload);
     gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
     gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
@@ -305,12 +305,12 @@ gulp.task('serve:dist', ['default'], function () {
         middleware: [historyApiFallback()]
     });
 });
-
-gulp.task('jade', function () {
+var dojade = function () {
     gulp.src('./app/*.jade')
         .pipe(jade())
         .pipe(gulp.dest('./app/'));
-});
+}
+gulp.task('jade', dojade);
 
 // Build production files, the default task
 gulp.task('default', ['clean'], function (cb) {
