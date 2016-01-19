@@ -7,12 +7,13 @@ html(lang="en")
             name="viewport",
             content="width=device-width, initial-scale=1")
         title Yiou's personal site
-        meta(name="theme-color",content="#D37773")
+        meta(name="theme-color",content="#FF8D87")
         link(rel="mainfest", href="manifest.json")
-        meta(name="msapplication-TileColor",content="#D37773")
+        meta(name="msapplication-TileColor",content="#FF8D87")
         meta(name="mobile-web-app-capable",content="yes")
         link(rel="stylesheet", href="styles/normalize.css")
-        link(rel="stylesheet",href="styles/skeleton.css")
+        link(rel="stylesheet", href="styles/skeleton.css")
+        link(rel="stylesheet", href="styles/animate.min.css")
         link(rel="stylesheet", href="styles/main.css")
         link(rel="stylesheet", href="https://cdn.rawgit.com/konpa/devicon/master/devicon.min.css")
         
@@ -45,7 +46,7 @@ html(lang="en")
 
 
                 iron-media-query(query="(min-width: 1000px)",query-matches="{{desktop}}")
-                include ./_menu.jade
+                
                 neon-animated-pages#pages(
                     selected="0",
                     entry-animation="[[entryAnimation]]",
@@ -58,7 +59,6 @@ html(lang="en")
                     .toolbar_title Yiou Chen
                     .open_menu_button
                         shape-shifter#menu_button(shape="menu",color="#fff",on-tap="_onMenuClick")
-               
-                ending-element
+                include ./_menu.jade
             script(src="scripts/hammer.min.js")
             script(src="scripts/app.js")            

@@ -1,16 +1,29 @@
-mixin dialog_inner
-    #custom_menu
-            .menu_header
-                .menu_title Menu
-                iron-icon#popout_close(icon="close",on-tap="_onMenuClick",style="color:white; cursor: pointer;")
+//- mixin dialog_inner
+//-     #custom_menu
+//-             .menu_header
+//-                 .menu_title Menu
+//-                 iron-icon#popout_close(icon="close",on-tap="_onMenuClick",style="color:white; cursor: pointer;")
+//- 
+//-             h2 hello there I cant get my icons
+//-             p  is a dialog with Material Design styling and optional animations when it is opened or closed. It provides styles for a header, content area, and an action area for buttons. You can use the <paper-dialog-scrollable> element (in its own repository) if you need a scrolling content area. See Polymer.PaperDialogBehavior for specifics.
+//-             
+//- template(is="dom-if", if="{{!desktop}}")
+//-     paper-dialog#menu_popout(modal, entry-animation="scale-up-animation", exit-animation="slide-up-animation")
+//-         +dialog_inner
+//- template(is="dom-if", if="{{desktop}}")
+//-     paper-dialog#menu_popout(modal, entry-animation="fade-in-animation", exit-animation="fade-out-animation")
+//-         +dialog_inner
 
-            h2 hello there I cant get my icons
-            p  is a dialog with Material Design styling and optional animations when it is opened or closed. It provides styles for a header, content area, and an action area for buttons. You can use the <paper-dialog-scrollable> element (in its own repository) if you need a scrolling content area. See Polymer.PaperDialogBehavior for specifics.
-            
-template(is="dom-if", if="{{!desktop}}")
-    paper-dialog#menu_popout(modal, entry-animation="scale-up-animation", exit-animation="slide-up-animation")
-        +dialog_inner
-template(is="dom-if", if="{{desktop}}")
-    paper-dialog#menu_popout(modal, entry-animation="fade-in-animation", exit-animation="fade-out-animation")
-        +dialog_inner
-    
+.menu_overlay
+    .menu_top
+    .menu_item 
+        h1 Home
+    .menu_projects
+        .menu_project_icon tMood
+        .menu_project_icon Poster
+    .menu_item 
+        h1 Blog
+    .menu_item 
+        h1 About
+    .menu_bottom
+    .menu_close_button(on-tap="_onMenuClick")
