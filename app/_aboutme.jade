@@ -9,23 +9,24 @@ neon-animatable.aboutme(data-route="about")
         .container
             h5 Yiou (pronounced as EE-oh) is a Computer Science student with a minor in Digital Art. One of his favorite things to do is to create pretty stuff. Over the course of his college career, he has been playing with various technologies, ranging from low level system programming to game development, from front-end design to mobile app development. 
     .about_skill.fullheight
-        .container
-            .about_comfortable 
+        .about_comfortable 
+            .container
                 h4 Yiou has found that he is most comfortable with:
-                div 
-                    .comfort_item
+                .comfort_items.row 
+                    .comfort_item.three.columns
                         iron-icon(icon="av:web")
                         p website front-end development
-                    .comfort_item
+                    .comfort_item.three.columns
                         iron-icon(icon="hardware:videogame-asset")
                         p game development
-                    .comfort_item
+                    .comfort_item.three.columns
                         iron-icon(icon="social:school")
                         p learning new stuff
-                    .comfort_item
+                    .comfort_item.three.columns
                         iron-icon(icon="maps:local-cafe")
                         p drinking self-made milk tea
-            .about_language 
+        .about_language 
+            .container
                 h4 Yiou speaks multiple languages with different proficiency, including
                 div
                     i(class="devicon-java-plain")
@@ -36,7 +37,10 @@ neon-animatable.aboutme(data-route="about")
     .about_contact.fullheight
         .container
             h4 Yiou is currently a junior student at Stony Brook University, graduating in June 2017. If you are interested in knowing more about Yiou, you can head over to his Github, Linkedin, or preferably, shoot him an email right now!
-            .social_icons
+        .social_icons
+            a(href="https://github.com/yiochen")
                 paper-button.github_button(raised) Github
+            a(href="https://www.linkedin.com/in/yiouchen")
                 paper-button.linkedin_button(raised) Linkedin
+            a(href="mailto:chen.yiou1992@gmail.com?subject=Hi%20Yiou")
                 paper-button.email_button(raised) E-mail Yiou
