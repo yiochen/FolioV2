@@ -62,9 +62,20 @@ body {
 }
 
 .menu_item{
-    background:pink;
+    padding:20px 0;
     width:80%;
     text-align: center;
+    transition:background 1s ease;
+}
+.menu_item a{
+    padding:0;
+    margin:0;
+    color:white;
+    text-decoration: none;
+}
+.menu_item:hover{
+    transition:background 1s ease;
+    background:rgba(255,255,255,0.2);
 }
 
 .menu_item h1{
@@ -146,14 +157,16 @@ body {
     justify-content: center;
 }
 
-.toolbar .open_menu_button {
-    float: right;
+#menu_button_container {
+    position: absolute;
+    right:0;
+    top:0;
     height: 40px;
     width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
 }
 
 .project_page {

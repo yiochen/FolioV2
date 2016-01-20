@@ -77,11 +77,13 @@
     this.$.pages.children[selected].scrollTop = 0;
   };
   app._onChangeSelected = function(route) {
-    this.entryAnimation = "fade-in-animation";
-    this.exitAnimation = "fade-out-animation";
+    this.entryAnimation = 'fade-in-animation';
+    this.exitAnimation = 'fade-out-animation';
     var selected = this.$.pages.selected;
     this.$.pages.children[selected].scrollTop = 0;
-    var newpage = this.$.pages.querySelector("[data-route='" + route + "']");
+    var query='[data-route="' + route + '"]';
+    console.log('querying '+query);
+    var newpage = this.$.pages.querySelector(query);
     //TODO: following will alert message for routing error. In production. This should be handled in a user friendly way
     if (newpage === null) {
       alert("Cannot find the requested page");
@@ -93,17 +95,28 @@
     this.$.pages.selected = selected;
 
   };
+  app._onMenuItemClicked = function(e){
+      var target=e.currentTarget;
+      this._onChangeSelected(target.getAttribute('data-route'));
+      this._onMenuClose();
+  };
+  app._onMenuClose = function(){
+      this.$.menu_button.shape = 'menu';
+      this.menuOpen = false;
+      _menuAnimateOut();
+  };
+  app._onMenuOpen = function(){
+      this.$.menu_button.shape = 'cancel';
+      this.menuOpen = true;
+      _menuAnimateIn();
+  };
   app._onMenuClick = function() {
     if (this.menuOpen) {
       // closing the menu
-      this.$.menu_button.shape = "menu";
-      this.menuOpen = false;
-      _menuAnimateOut();
+      this._onMenuClose();
     } else {
       //opening the menu
-      this.$.menu_button.shape = "cancel";
-      this.menuOpen = true;
-      _menuAnimateIn();
+      this._onMenuOpen();
     }
   };
 
@@ -142,10 +155,10 @@
     menu.style.display = 'flex';
     one(menu, ['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'],function (e) {
         removeClass(menu);
-        console.log(e);
       }
     );
     addClass(removeClass(menu),['animated', 'fadeIn']);
+    menu.appendChild($('#menu_button_container'));
     console.log('animating in');
   }
 
@@ -159,6 +172,7 @@
       }
     );
     addClass(removeClass(menu),['animated', 'fadeOut']);
+    $('.toolbar').appendChild($('#menu_button_container'));
   }
 
 

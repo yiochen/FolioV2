@@ -16,14 +16,14 @@
 
 .menu_overlay
     .menu_top
-    .menu_item 
+    .menu_item(on-tap="_onMenuItemClicked",data-route="main") 
         h1 Home
     .menu_projects
-        .menu_project_icon tMood
-        .menu_project_icon Poster
-    .menu_item 
-        h1 Blog
-    .menu_item 
+        .menu_project_icon(on-tap="_onMenuItemClicked",data-route="project/tmood")  tMood
+        .menu_project_icon(on-tap="_onMenuItemClicked",data-route="project/poster")  Poster
+    .menu_item
+        a(href="http://yiou.me/Blog/")
+            h1 Blog
+    .menu_item(on-tap="_onMenuItemClicked",data-route="about")  
         h1 About
     .menu_bottom
-    .menu_close_button(on-tap="_onMenuClick")
