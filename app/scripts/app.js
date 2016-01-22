@@ -16,6 +16,7 @@
     addClass(preloader,['animated','fadeOut']);
     one(navInstr,['animationend'],function(){
         console.log('finished showing instruction, fading out ');
+        init();
         addClass(navInstr,['animated','fadeOut']);
         one(navInstr,['animationend'],function(){
             console.log('show_nav fadeOut ended');
@@ -29,7 +30,19 @@
     console.log('all elements upgraded, all html imports finished');
 
   });
-
+  function init(){
+      $('body').addEventListener("keydown",function(ev){
+          var char=ev.which||event.keyCode;
+          switch(char){
+              case 39:
+                app._onNextClick();
+                break;
+              case 37:
+                app._onPrevClick();
+                break;
+          }
+      },false);
+  }
   // Sets app default base URL
   app.baseUrl = 'http://0.0.0.0:8000/app/';
   app.selected = 0;
@@ -65,30 +78,31 @@
     });
     console.log("added guesture support");
   });
-
+  function initPage(page){
+      page.scrollTop=0;
+      page.focus();
+  }
   app._onPrevClick = function() {
     this.entryAnimation = 'slide-from-left-animation';
     this.exitAnimation = 'slide-right-animation';
     var selected = this.$.pages.selected;
-    this.$.pages.children[selected].scrollTop = 0;
     selected--;
     if (selected < 0) {
       selected = this.$.pages.children.length - 1;
     }
     this.$.pages.selected = selected;
-    this.$.pages.children[selected].scrollTop = 0;
+    initPage(this.$.pages.children[selected]);
   };
   app._onNextClick = function() {
     this.entryAnimation = 'slide-from-right-animation';
     this.exitAnimation = 'slide-left-animation';
     var selected = this.$.pages.selected;
-    this.$.pages.children[selected].scrollTop = 0;
     selected++;
     if (selected >= this.$.pages.children.length) {
       selected = 0;
     }
     this.$.pages.selected = selected;
-    this.$.pages.children[selected].scrollTop = 0;
+    initPage(this.$.pages.children[selected]);
   };
   app._onChangeSelected = function(route) {
     this.entryAnimation = 'fade-in-animation';
@@ -105,7 +119,7 @@
     }
 
     selected = this.$.pages.indexOf(newpage);
-    this.$.pages.children[selected].scrollTop = 0;
+    initPage(this.$.pages.children[selected]);
     this.$.pages.selected = selected;
 
   };
