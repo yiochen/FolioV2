@@ -10,8 +10,22 @@
 
   HTMLImports.whenReady(function() {
     $('.unresolved').classList.remove('unresolved');
-    var preloader = $('.preloading');
-    preloader.parentNode.removeChild(preloader);
+    var preloader = $('.preload');
+    var navInstr=$('.show_nav');
+    navInstr.style.display='block';
+    addClass(preloader,['animated','fadeOut']);
+    one(navInstr,['animationend'],function(){
+        console.log('finished showing instruction, fading out ');
+        addClass(navInstr,['animated','fadeOut']);
+        one(navInstr,['animationend'],function(){
+            console.log('show_nav fadeOut ended');
+            removeClass(preloader);
+            removeClass(navInstr);
+            preloader.parentNode.removeChild(preloader);
+            navInstr.parentNode.removeChild(navInstr);
+        });
+    });
+    // preloader.parentNode.removeChild(preloader);
     console.log('all elements upgraded, all html imports finished');
 
   });

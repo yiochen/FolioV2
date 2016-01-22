@@ -24,7 +24,6 @@ html(lang="en")
         
         
     body
-        .preloading Hello I am loading
         .fullbleed.layout.vertical.unresolved        
             template#app(is="dom-bind")
                 //slow-element
@@ -60,5 +59,6 @@ html(lang="en")
                     #menu_button_container
                         shape-shifter#menu_button(shape="menu",color="#fff",on-tap="_onMenuClick")
                 include ./_menu.jade
-            script(src="scripts/hammer.min.js")
-            script(src="scripts/app.js")            
+        include ./_preload.jade
+        script(src="scripts/hammer.min.js")
+        script(src="scripts/app.js")            

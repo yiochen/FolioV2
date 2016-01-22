@@ -24,6 +24,8 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var jade = require('gulp-jade');
+var sass = require('gulp-sass');
+
 // var ghPages = require('gulp-gh-pages');
 
 var AUTOPREFIXER_BROWSERS = [
@@ -103,6 +105,12 @@ var optimizeHtmlTask = function (src, dest) {
         }));
 };
 
+gulp.task('sass',function(){
+    return gulp.src('./app/styles/*.scss')
+    .pipe(sass().on('error',sass.logError))
+    .pipe(gulp.dest('./app/styles'));
+});
+
 // Compile and automatically prefix stylesheets
 gulp.task('styles', function () {
     return styleTask('styles', ['**/*.css']);
@@ -143,6 +151,7 @@ gulp.task('images', function () {
 gulp.task('copy', function () {
     var app = gulp.src([
     'app/*',
+    '!app/styles/*.scss',
     '!app/*.jade',
     '!app/test',
     '!app/cache-config.json'
@@ -251,7 +260,7 @@ gulp.task('clean', function () {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['jade', 'styles', 'elements', 'images'], function () {
+gulp.task('serve', ['jade', 'sass', 'styles', 'elements', 'images'], function () {
     browserSync({
         port: 5000,
         notify: false,
@@ -276,6 +285,7 @@ gulp.task('serve', ['jade', 'styles', 'elements', 'images'], function () {
             }
         }
     });
+    gulp.watch(['app/styles/*.scss'],['sass']);
     gulp.watch(['app/*.jade'], dojade);
     gulp.watch(['app/scripts/*.js'],reload);
     gulp.watch(['app/**/*.html'], reload);
@@ -318,6 +328,7 @@ gulp.task('jade', dojade);
 gulp.task('default', ['clean'], function (cb) {
     // Uncomment 'cache-config' if you are going to use service workers.
     runSequence(
+        'sass',
         'jade', ['copy', 'styles'],
         'elements', ['images', 'fonts', 'html'],
         'vulcanize', // 'cache-config',
