@@ -205,6 +205,12 @@ body {
   .left_button, .right_button {
     display: inline-flex !important; } }
 
+.copyright {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  text-align: center; }
+
 .menu_overlay {
   user-select: none;
   position: absolute;
@@ -278,11 +284,8 @@ body {
   font-size: 1.5em;
   position: absolute;
   bottom: 0;
-  right: 0; }
-
-@media (min-width: 1000px) {
-  .main_page .main_page_intro {
-    margin-bottom: 50px; } }
+  right: 0;
+  margin-bottom: 50px; }
 
 .main_page #greeting {
   font-size: 2em; }
