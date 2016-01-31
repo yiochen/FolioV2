@@ -368,9 +368,9 @@ background color: $background_color
 
 .project_intro {
   background: rgba(76, 66, 82, 0.6);
-  width: 80vw;
+  width: 100vw;
   position: absolute;
-  left: 10vw;
+  left: 0;
   bottom: 50px;
   box-sizing: border-box;
   padding: 20px;
@@ -380,8 +380,11 @@ background color: $background_color
 @media (min-width: 750px) {
   .project_intro {
     width: 500px;
+    left: 10vw;
     padding: 40px;
-    padding-top: 0; } }
+    padding-top: 0; }
+  .project_meta_item {
+    width: 50%; } }
 
 .project_title {
   font-size: 3em; }
@@ -394,7 +397,7 @@ background color: $background_color
   display: flex;
   flex-wrap: wrap; }
   .project_meta .project_meta_item {
-    width: 50%;
+    width: 100%;
     padding-right: 10px;
     box-sizing: border-box; }
     .project_meta .project_meta_item span {
