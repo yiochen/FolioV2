@@ -1,0 +1,134 @@
+
+.aboutme_profile {
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    position:absolute;
+    left: calc(50vw - 50px);
+    top: calc(50vh - 50px);
+}
+
+.aboutme_astronaut {
+    position: absolute;
+    width: 650px;
+    left: 50vw;
+    top: 50vh;
+    transform:translate(-370px, -151px);
+    opacity: 0.4;
+}
+
+.about_title {
+    padding-top:100px;
+    text-align: center;
+}
+
+.about_main {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 10px 47px -15px rgba(0, 0, 0, 0.75);
+    background: $main_gradient, url(../images/planet.jpg);
+    background-size:cover;
+    background-position: center;
+}
+
+.about_intro{
+    display: flex;
+    align-items: center;
+}
+
+.about_skill {
+    background: lighten($background_color, 10%);
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+    justify-content: space-around;
+}
+
+.about_skill .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.about_skill .about_comfortable {
+    width:100%;
+    display: flex;
+    flex-flow: wrap;
+
+}
+
+.about_skill .about_comfortable h4:first-child {
+    width:100%;
+    margin: 20px 0;
+}
+
+.about_skill .about_comfortable .comfort_items {
+}
+
+.about_skill .about_comfortable .comfort_item {
+    display:flex;
+
+}
+
+.about_skill .about_comfortable .comfort_item p {
+}
+
+
+@media (min-width: 1000px) {
+    .about_skill .about_comfortable .comfort_item {
+
+    }
+}
+
+.about_skill .about_comfortable .comfort_item iron-icon {
+    flex-shrink: 0;
+    margin-right: 20px;
+    height: 40px;
+    width: 40px;
+}
+
+.about_skill .about_language {
+    width:100%;
+}
+
+.about_language div{
+    display:flex;
+    flex-wrap: wrap;
+}
+.about_language i {
+    padding: 20px;
+    font-size: 40px;
+}
+
+.about_contact {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+.about_contact .container {
+    display:flex;
+    flex-grow:2;
+    align-items:center;
+}
+
+.about_contact h4 {
+}
+
+.about_contact .social_icons {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.about_contact .social_icons a{
+    color:white;
+}
+
+.aboutme_profile img {
+    max-width: 100%;
+    width: 100%;
+}
+
+.aboutme_astronaut {}

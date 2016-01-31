@@ -1,0 +1,17 @@
+.main_page {
+    color: white;
+    height: 100vh;
+}
+
+.main_page .main_page_intro {
+    text-align: right;
+    font-size: 1.5em;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom:50px;
+}
+
+.main_page #greeting {
+    font-size: 2em;
+}

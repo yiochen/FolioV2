@@ -1,3 +1,4 @@
+var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'];
 (function(document) {
   'use strict';
   var $ = function(selector) {
@@ -42,7 +43,7 @@
                 break;
           }
       },false);
-      
+
   }
   // Sets app default base URL
   app.baseUrl = 'http://0.0.0.0:8000/app/';
@@ -81,8 +82,17 @@
   });
   function initPage(page){
       page.scrollTop=0;
+      var intro=page.querySelector('.project_intro');
+      if (intro){
+          intro.style.animationName='showintro';
+      }
       page.focus();
   }
+
+  app.getCurrentPage = function(){
+      return this.$.pages.children[this.$.pages.selected];
+  };
+
   app._onPrevClick = function() {
     this.entryAnimation = 'slide-from-left-animation';
     this.exitAnimation = 'slide-right-animation';
@@ -148,6 +158,19 @@
       this._onMenuOpen();
     }
   };
+  app._onProjectClick = function(){
+      var page=this.getCurrentPage();
+      var detail = page.querySelector('.project_detail');
+      if (typeof page.opened === 'undefined' || !page.opened){
+          page.opened=true;
+          //opening detail
+          _projectDetailAnimateIn(page);
+      }else{
+          //closing detail
+          page.opened=false;
+          _projectDetailAnimateOut(page);
+      }
+  };
 
   function one(element, eventList, func) {
     console.log('adding event listeners');
@@ -182,9 +205,10 @@
   function _menuAnimateIn() {
     var menu = $('.menu_overlay');
     menu.style.display = 'flex';
-    one(menu, ['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'],function (e) {
-        removeClass(menu);
-      }
+    one(menu, _animationEvent,
+        function () {
+            removeClass(menu);
+        }
     );
     addClass(removeClass(menu),['animated', 'fadeIn']);
     menu.appendChild($('#menu_button_container'));
@@ -193,8 +217,8 @@
 
   function _menuAnimateOut() {
     var menu = $('.menu_overlay');
-    one(menu, ['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'],
-      function(e) {
+    one(menu, _animationEvent,
+      function() {
         removeClass(menu);
         menu.style.display = 'none';
         console.log('animating out');
@@ -204,6 +228,33 @@
     $('.toolbar').appendChild($('#menu_button_container'));
   }
 
+  function _projectDetailAnimateIn(page){
+    var intro = page.querySelector('.project_intro');
+    if (intro){
+        intro.style.animationName='hideintro';
+    }
+    var detail= page.querySelector('.project_detail');
+    if (detail){
+        detail.style.display='block';
+        detail.style.animationName='showdetail';
+    }
+  }
+
+  function _projectDetailAnimateOut(page){
+      var intro = page.querySelector('.project_intro');
+      if (intro){
+           intro.style.animationName='showintro';
+      }
+      var detail= page.querySelector('.project_detail');
+      if (detail){
+          one(detail,_animationEvent,
+            function(){
+                detail.style.display='none';
+            });
+          detail.style.animationName='hidedetail';
+      }
+
+  }
 
 
 

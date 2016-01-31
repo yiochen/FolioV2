@@ -1,0 +1,72 @@
+.menu_overlay{
+    user-select:none;
+    position:absolute;
+    height:100vh;
+    width:100vw;
+    background:$background_color;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: space-around;
+    display:none;
+}
+
+.menu_top{
+    margin-top:50px;
+    height:1px;
+    width:80%;
+    background:white;
+}
+
+.menu_bottom{
+    height:1px;
+    width:80%;
+    background:white;
+}
+
+.menu_item{
+    cursor: pointer;
+    padding:20px 0;
+    width:80%;
+    text-align: center;
+    transition:background 1s ease;
+}
+.menu_item a{
+    padding:0;
+    margin:0;
+    color:white;
+    text-decoration: none;
+}
+.menu_item:hover{
+    transition:background 1s ease;
+    background:rgba(255,255,255,0.2);
+}
+
+.menu_item h1{
+    margin-bottom:0;
+}
+
+.menu_projects{
+
+    width:80%;
+    display:flex;
+    justify-content: center;
+}
+
+.menu_project_icon{
+    cursor: pointer;
+    height:60px;
+    width:60px;
+    background: honeydew;
+    color:brown;
+    margin:10px;
+}
+
+.menu_close_button{
+    height:50px;
+    width:50px;
+    background: cyan;
+    position:absolute;
+    top:0;
+    right:0;
+}

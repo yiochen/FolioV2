@@ -58,9 +58,10 @@ html(lang="en")
                     .toolbar_title Yiou Chen
                     #menu_button_container
                         shape-shifter#menu_button(shape="menu",color="#fff",on-tap="_onMenuClick")
-                include ./_menu.jade
+                include ./_progress.jade
                 iron-icon.left_button(icon="chevron-left",on-tap="_onPrevClick")
                 iron-icon.right_button(icon="chevron-right",on-tap="_onNextClick")
+                include ./_menu.jade
         include ./_preload.jade
         script(src="scripts/hammer.min.js")
         script(src="scripts/app.js")            
