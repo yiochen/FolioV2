@@ -82,11 +82,23 @@ var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 
   });
   function initPage(page){
       page.scrollTop=0;
+      if (page.opened){
+          page.opened=false;
+          var detail= page.querySelector('.project_detail');
+          if (detail){
+              detail.style.display='none';
+              detail.style.animationName='';
+
+          }
+      }
       var intro=page.querySelector('.project_intro');
       if (intro){
           intro.style.animationName='showintro';
       }
       page.focus();
+  }
+
+  function cleanPage(page){
   }
 
   app.getCurrentPage = function(){
@@ -97,6 +109,7 @@ var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 
     this.entryAnimation = 'slide-from-left-animation';
     this.exitAnimation = 'slide-right-animation';
     var selected = this.$.pages.selected;
+    cleanPage(this.$.pages.children[selected]);
     selected--;
     if (selected < 0) {
       selected = this.$.pages.children.length - 1;
@@ -108,6 +121,7 @@ var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 
     this.entryAnimation = 'slide-from-right-animation';
     this.exitAnimation = 'slide-left-animation';
     var selected = this.$.pages.selected;
+    cleanPage(this.$.pages.children[selected]);
     selected++;
     if (selected >= this.$.pages.children.length) {
       selected = 0;
@@ -119,13 +133,13 @@ var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 
     this.entryAnimation = 'fade-in-animation';
     this.exitAnimation = 'fade-out-animation';
     var selected = this.$.pages.selected;
-    this.$.pages.children[selected].scrollTop = 0;
+    cleanPage(this.$.pages.children[selected]);
     var query='[data-route="' + route + '"]';
     console.log('querying '+query);
     var newpage = this.$.pages.querySelector(query);
     //TODO: following will alert message for routing error. In production. This should be handled in a user friendly way
     if (newpage === null) {
-      alert("Cannot find the requested page");
+      alert('Cannot find the requested page');
       return;
     }
 

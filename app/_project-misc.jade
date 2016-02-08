@@ -1,0 +1,48 @@
+neon-animatable(data-route="project/misc")
+    div(style="background:gray; width:100vw; height: 100vh;")
+        .container(style="position:relative; height:100vh;")
+            img(src="images/project/miso/bitcampFigure.png",style="height:20%;position:absolute; right:0;bottom:50px;")
+    .gradient_overlay
+    .project_intro
+        .project_title Miscellaneous Design Projects
+        .project_desc Do cool things that matter and look good.
+        .project_meta
+            .project_meta_item #[span Date] 2011 - present
+            .project_meta_item #[span Softwares] Photoshop, Illustrator
+        .read_more.light_button(on-tap="_onProjectClick") Read More
+            
+    
+    //
+        .project_preview
+            template(is="dom-if", if="{{!desktop}}")
+                img(src="images/tmood_vertical_01.png")
+            template(is="dom-if", if="{{desktop}}")
+                img(src="images/tmood_horizontal_01.png")
+            .gradient_overlay
+    .project_detail
+        
+        .container.project_content 
+            .project_title Miscellaneous Design Projects #[shape-shifter(shape="cancel",color="#fff",on-tap="_onProjectClick")]
+            h5 Some other design projects for competitions or freelance projects.
+            iron-image(src="images/project/miso/bitcamp-01.png")
+            iron-image(src="images/project/miso/bitcampBG-02.png")
+            p Designes that made me one of the #[a(href="http://bitca.mp/colorwar/") Bitcamp Color War] finalists.
+            iron-image(src="images/project/miso/Drawingicons-01.jpg")
+            p Freelance project, hand-drawn style icons
+            iron-image(src="images/project/miso/massage_mend_me_background-08.png")
+            p Logo design for a local massage salon.
+            iron-image(src="images/project/miso/tecintrologo-01.jpg")
+            iron-image(src="images/project/miso/tecintrologo-02.jpg")
+            p Logo design for a company called Tecintro(sadly not adopted).
+            
+        
+    //
+        .project_footer
+            template(is="dom-if", if="{{!desktop}}")
+                img(src="images/tmood_vertical_02.png")
+            template(is="dom-if", if="{{desktop}}")
+                img(src="images/tmood_vertical_02.png")
+            .gradient_overlay
+            .copyright Copyright &#169;2016 Yiou Chen. All rights reserved.
+        
+            
