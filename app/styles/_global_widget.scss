@@ -80,6 +80,7 @@ $toolbar_height:40px;
 }
 $progress_bar_height:2px;
 .progress_container{
+    pointer-events: none;
     position:absolute;
     // background:transparentize(white, 0.5);
     left:0;
@@ -90,6 +91,7 @@ $progress_bar_height:2px;
     justify-content: center;
     align-items: center;
     .progress_bar{
+        pointer-events:all;
         position:relative;
         height:$progress_bar_height;
         width:80%;

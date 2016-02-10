@@ -1,15 +1,39 @@
 var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'];
-
+var projectRoutes=['project/tmood','project/chinablue','project/misc'];
 function isTouchScreen(){
     return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
 }
+Element.prototype.animateProp = function(prop,dest, duration,callback){
+    var element=this;
+    element.propAnimating=prop;
+    var frames=Math.trunc(duration/15);//15 minisecon per frame. 60 fps
+    var start=element[prop];
+    var distance=dest-element[prop];
+    var step=Math.PI/frames;
 
-function one(element, eventList, func) {
+    var interval=setInterval(function(){
+        requestAnimationFrame(function(){
+            if (frames>0){
+                element[prop]=start+(Math.cos(step*frames)+1)/2*distance;
+                frames--;
+            }else{
+                element[prop]=dest;
+                clearInterval(interval);
+                element.propAnimating='';
+                if (callback){
+                    callback(element);
+                }
+            }
+        });
+    },15);
+};
+Element.prototype.one=function (eventList, func, bool) {
+    var element=this;
   console.log('adding event listeners');
   function removeAfterFire(e){
       func(e);
       eventList.forEach(function (ev){
-          element.removeEventListener(ev,removeAfterFire);
+          element.removeEventListener(ev,removeAfterFire,bool);
       });
   }
 
@@ -58,11 +82,11 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
     var navInstr=$('.show_nav');
     navInstr.style.display='block';
     addClass(preloader,['animated','fadeOut']);
-    one(navInstr,['animationend'],function(){
+    navInstr.one(['animationend'],function(){
         console.log('finished showing instruction, fading out ');
-        init();
+        app.init();
         addClass(navInstr,['animated','fadeOut']);
-        one(navInstr,['animationend'],function(){
+        navInstr.one(['animationend'],function(){
             console.log('show_nav fadeOut ended');
             removeClass(preloader);
             removeClass(navInstr);
@@ -74,8 +98,8 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
     console.log('all elements upgraded, all html imports finished');
 
   });
-  function init(){
-      $('body').addEventListener("keydown",function(ev){
+  app.init=function (){
+      $('body').addEventListener('keydown',function(ev){
           var char=ev.which||event.keyCode;
           switch(char){
               case 39:
@@ -86,15 +110,30 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
                 break;
           }
       },false);
-      var projectPage=app._getPageByRoute('project/tmood');
-      if (projectPage){
-          projectPage.addEventListeners(['mousewheel','DOMMouseScroll'],function(e){
-              console.log("scroll");
-              if (e.wheelDelta <0 && !projectPage.opened){
-                  app._onProjectClick();
+      projectRoutes.forEach(function (route){
+         var page=$('[data-route="' + route+'"]');
+         if  (page) {
+             page.addEventListeners(['mousewheel','DOMMouseScroll'],function(e){
+                 console.log("scroll");
+                 if (e.wheelDelta <0 && !page.opened){
+                     app._onProjectClick();
+                 }
+             },false);
+         }
+      });
+      var aboutpage=$('[data-route="about"]');
+      if (aboutpage){
+          aboutpage.addEventListeners(['mousewheel','DOMMouseScroll'],function(e){
+              if (e.wheelDelta<0){
+                  app._aboutnext();
+              }else if (e.wheelDelta>0){
+                  app._aboutprev();
               }
           },false);
       }
+
+
+
 
   }
   // Sets app default base URL
@@ -159,6 +198,7 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
   };
 
   app._onPrevClick = function() {
+      if (this.getCurrentPage().opened){return;}
     this.entryAnimation = 'slide-from-left-animation';
     this.exitAnimation = 'slide-right-animation';
     var selected = this.$.pages.selected;
@@ -171,6 +211,7 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
     initPage(this.$.pages.children[selected]);
   };
   app._onNextClick = function() {
+      if (this.getCurrentPage().opened){return;}
     this.entryAnimation = 'slide-from-right-animation';
     this.exitAnimation = 'slide-left-animation';
     var selected = this.$.pages.selected;
@@ -241,12 +282,44 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
           _projectDetailAnimateOut(page);
       }
   };
+  app._aboutnext=function(){
+      var aboutpage=$('[data-route="about"]');
 
+      if (aboutpage){
+          if ('scrollTop' === aboutpage.propAnimating){return;}
+          var dest=aboutpage.scrollTop+window.innerHeight;
 
+          if (aboutpage.scrollTop+window.innerHeight>=aboutpage.scrollHeight){
+              dest=aboutpage.scrollHeight-window.innerHeight;
+          }
+          if (Math.abs(aboutpage.scrollTop-dest)<10){
+              aboutpage.scrollTop=dest;
+          }else{
+              aboutpage.animateProp('scrollTop',dest,1000);
+          }
+          
+      }
+  };
+  app._aboutprev=function(){
+      var aboutpage=$('[data-route="about"]');
+      if (aboutpage){
+          if ('scrollTop' === aboutpage.propAnimating){return;}
+          var dest=aboutpage.scrollTop-window.innerHeight;
+          if (aboutpage.scrollTop-window.innerHeight<=0){
+              dest=0;
+          }
+          if (Math.abs(aboutpage.scrollTop-dest)<10){
+              aboutpage.scrollTop=dest;
+          }else{
+              aboutpage.animateProp('scrollTop',dest,1000);
+          }
+
+      }
+  }
   function _menuAnimateIn() {
     var menu = $('.menu_overlay');
     menu.style.display = 'flex';
-    one(menu, _animationEvent,
+    menu.one( _animationEvent,
         function () {
             removeClass(menu);
         }
@@ -258,7 +331,7 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
 
   function _menuAnimateOut() {
     var menu = $('.menu_overlay');
-    one(menu, _animationEvent,
+    menu.one( _animationEvent,
       function() {
         removeClass(menu);
         menu.style.display = 'none';
@@ -276,7 +349,13 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
     }
     var detail= page.querySelector('.project_detail');
     if (detail){
+        $('.overlay_popup').appendChild(detail);
         detail.style.display='block';
+        detail.one(_animationEvent,function(e){
+            console.log("animationEnds");
+            // detail.style.animationPlayState='running';
+            detail.style.pointerEvents='all';
+        },false);
         detail.style.animationName='showdetail';
     }
   }
@@ -286,11 +365,16 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
       if (intro){
            intro.style.animationName='showintro';
       }
-      var detail= page.querySelector('.project_detail');
+      var detail= $('.overlay_popup').querySelector('.project_detail');
+
       if (detail){
-          one(detail,_animationEvent,
+
+          detail.one(_animationEvent,
             function(){
+                detail.style.animationName='';
+                page.appendChild(detail);
                 detail.style.display='none';
+                detail.style.pointerEvents='none';
             });
           detail.style.animationName='hidedetail';
       }

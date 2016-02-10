@@ -27,22 +27,6 @@ html(lang="en")
         .fullbleed.layout.vertical.unresolved        
             template#app(is="dom-bind")
                 //slow-element
-                
-                //- paper-drawer-panel#paperDrawerPanel
-                //-     paper-scroll-header-panel(drawer,fixed)
-                //-         paper-toolbar#drawerToolbar
-                //-             span.paper-font-title Menu
-                //-         paper-menu.list(attr-for-selected="data-route", selected="[[route]]")
-                //-             a(data-route="home",href="{{baseUrl}}")
-                //-                 iron-icon(icon="home")
-                //-                 span Home
-                //-             a(data-route="users",href="{{baseUrl}}users")
-                //-                 iron-icon(icon="info")
-                //-                 span Users
-                //-             a(data-route="contact",href="{{baseUrl}}contact")
-                //-                 iron-icon(icon="mail")
-                //-                 span Contact
-
 
                 iron-media-query(query="(min-width: 1000px)",query-matches="{{desktop}}")
                 
@@ -55,7 +39,6 @@ html(lang="en")
                     include ./_project-chinablue.jade
                     include ./_project-misc.jade
                     include ./_aboutme.jade
-                    
                 .toolbar 
                     .toolbar_icon a
                     .toolbar_title Yiou Chen
@@ -64,6 +47,7 @@ html(lang="en")
                 include ./_progress.jade
                 iron-icon.left_button(icon="chevron-left",on-tap="_onPrevClick")
                 iron-icon.right_button(icon="chevron-right",on-tap="_onNextClick")
+                .overlay_popup
                 include ./_menu.jade
         include ./_preload.jade
         script(src="scripts/hammer.min.js")

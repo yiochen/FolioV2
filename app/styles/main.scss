@@ -66,3 +66,10 @@ html {
     font-weight: bold;
     cursor:pointer;
 }
+.overlay_popup{
+    position:absolute;
+    left:0;
+    top:0;
+    height:100vh;
+    pointer-events:none;
+}

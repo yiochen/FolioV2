@@ -70,12 +70,13 @@
     width:50px;
 }
 .project_detail{
+    pointer-events:none;
     display:none;
     position:absolute;
     top:$toolbar_height;
     left:0;
     bottom:0;
-    overflow-y:scroll;
+    overflow-y:auto;
     width:100vw;
     background:$background_color;
     animation-duration: 1s;
