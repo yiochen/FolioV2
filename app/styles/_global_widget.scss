@@ -83,7 +83,7 @@ $progress_bar_height:2px;
     position:absolute;
     // background:transparentize(white, 0.5);
     left:0;
-    bottom:0;
+    top:$toolbar_height;
     height:50px;
     width:100vw;
     display: flex;
@@ -93,7 +93,10 @@ $progress_bar_height:2px;
         position:relative;
         height:$progress_bar_height;
         width:80%;
-        background-color:pink;
+        max-width:200px;
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
         padding:0!important;
     }
     .progress_bar_overlay{
@@ -104,17 +107,20 @@ $progress_bar_height:2px;
     }
     $progress_dot_size:10px;
     .progress_dot{
-        position:absolute;
+        cursor: pointer;
         height:$progress_dot_size;
         width:$progress_dot_size;
         border-radius:50%;
-        border:1px white solid;
+        border:2px pink solid;
         box-sizing: border-box;
 
-        transform:translate(- $progress_dot_size / 2,- $progress_dot_size / 2 );
+        // transform:translate(- $progress_dot_size / 2,- $progress_dot_size / 2 );
         top:$progress_bar_height / 2;
-        left:50%;
-
+        transition: all 0.5s ease;
+    }
+    .progress_dot:hover{
+        transform: scale(2,2);
+        transition: all 0.5s ease;
     }
 
 }

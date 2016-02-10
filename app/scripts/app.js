@@ -1,4 +1,47 @@
 var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'];
+
+function isTouchScreen(){
+    return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
+}
+
+function one(element, eventList, func) {
+  console.log('adding event listeners');
+  function removeAfterFire(e){
+      func(e);
+      eventList.forEach(function (ev){
+          element.removeEventListener(ev,removeAfterFire);
+      });
+  }
+
+  eventList.forEach(function (ev){
+      element.addEventListener(ev, removeAfterFire);
+  });
+}
+
+function addClass(element, classList){
+    element.tempClassList=element.tempClassList||[];
+    classList.forEach(function(cl){
+        if (element.tempClassList.indexOf(cl)===-1){
+            element.tempClassList.push(cl);
+        }
+        element.classList.add(cl);
+    });
+    return element;
+}
+
+function removeClass(element){
+    var classList=element.tempClassList=element.tempClassList||[];
+    classList.forEach(function(cl){
+       element.classList.remove(cl);
+    });
+    return element;
+}
+Element.prototype.addEventListeners=function(eventlist, func, bool){
+    for (var i=0; i<eventlist.length;i++){
+        this.addEventListener(eventlist[i],func,bool);
+    }
+};
+
 (function(document) {
   'use strict';
   var $ = function(selector) {
@@ -43,12 +86,23 @@ var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 
                 break;
           }
       },false);
+      var projectPage=app._getPageByRoute('project/tmood');
+      if (projectPage){
+          projectPage.addEventListeners(['mousewheel','DOMMouseScroll'],function(e){
+              console.log("scroll");
+              if (e.wheelDelta <0 && !projectPage.opened){
+                  app._onProjectClick();
+              }
+          },false);
+      }
 
   }
   // Sets app default base URL
   app.baseUrl = 'http://0.0.0.0:8000/app/';
   app.selected = 0;
   app.menuOpen = false;
+
+
   //if (window.location.port === '') { // if production
     // Uncomment app.baseURL below and
     // set app.baseURL to '/your-pathname/' if running from folder in production
@@ -88,7 +142,6 @@ var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 
           if (detail){
               detail.style.display='none';
               detail.style.animationName='';
-
           }
       }
       var intro=page.querySelector('.project_intro');
@@ -129,14 +182,17 @@ var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 
     this.$.pages.selected = selected;
     initPage(this.$.pages.children[selected]);
   };
+  app._getPageByRoute = function(route){
+      var query='[data-route="' + route + '"]';
+      return this.$.pages.querySelector(query);
+  };
   app._onChangeSelected = function(route) {
     this.entryAnimation = 'fade-in-animation';
     this.exitAnimation = 'fade-out-animation';
     var selected = this.$.pages.selected;
     cleanPage(this.$.pages.children[selected]);
-    var query='[data-route="' + route + '"]';
-    console.log('querying '+query);
-    var newpage = this.$.pages.querySelector(query);
+
+    var newpage = this._getPageByRoute(route);
     //TODO: following will alert message for routing error. In production. This should be handled in a user friendly way
     if (newpage === null) {
       alert('Cannot find the requested page');
@@ -186,36 +242,7 @@ var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 
       }
   };
 
-  function one(element, eventList, func) {
-    console.log('adding event listeners');
-    function removeAfterFire(e){
-        func(e);
-        eventList.forEach(function (ev){
-            element.removeEventListener(ev,removeAfterFire);
-        });
-    }
-    eventList.forEach(function (ev){
-        element.addEventListener(ev, removeAfterFire);
-    });
 
-  }
-  function addClass(element, classList){
-      element.tempClassList=element.tempClassList||[];
-      classList.forEach(function(cl){
-          if (element.tempClassList.indexOf(cl)===-1){
-              element.tempClassList.push(cl);
-          }
-          element.classList.add(cl);
-      });
-      return element;
-  }
-  function removeClass(element){
-      var classList=element.tempClassList=element.tempClassList||[];
-      classList.forEach(function(cl){
-         element.classList.remove(cl);
-      });
-      return element;
-  }
   function _menuAnimateIn() {
     var menu = $('.menu_overlay');
     menu.style.display = 'flex';

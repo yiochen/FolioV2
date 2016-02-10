@@ -1,4 +1,8 @@
 .progress_container
     .progress_bar
-        .progress_bar_overlay
-        .progress_dot
+        //- .progress_bar_overlay
+        .progress_dot(onclick="app._onChangeSelected('main')")
+        .progress_dot(onclick="app._onChangeSelected('project/tmood')")
+        .progress_dot(onclick="app._onChangeSelected('project/chinablue')")
+        .progress_dot(onclick="app._onChangeSelected('project/misc')")
+        .progress_dot(onclick="app._onChangeSelected('about')")
