@@ -256,7 +256,7 @@ gulp.task('cache-config', function (callback) {
 // Clean output directory
 gulp.task('clean', function () {
     return del(['.tmp', dist() + "/**", '!' + dist(), '!**/.gitignore', '!**/.gitattributes',
-        '!**/' + dist('.git'), '!**/README.md']);
+        '!**/' + dist('.git'), '!**/README.md','!**/' + dist('CNAME')]);
 });
 
 // Watch files for changes & reload
