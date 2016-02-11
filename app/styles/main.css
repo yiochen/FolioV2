@@ -256,13 +256,16 @@ background color: $background_color
   position: absolute;
   width: 100%;
   /*background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 59%, rgba(0, 0, 0, 0) 100%);*/
-  background: rgba(255, 141, 135, 0.8); }
+  background: rgba(255, 141, 135, 0.8);
+  display: flex;
+  align-items: center; }
 
 .toolbar .toolbar_icon {
+  margin-left: 10px;
   color: white;
   float: left;
-  height: 40px;
-  width: 40px;
+  height: 24px;
+  width: 24px;
   display: flex;
   align-items: center;
   justify-content: center; }
@@ -346,12 +349,12 @@ background color: $background_color
     bottom: -200px;
     opacity: 0; }
   to {
-    bottom: 50px;
+    bottom: 0;
     opacity: 100%; } }
 
 @keyframes hideintro {
   from {
-    bottom: 50px;
+    bottom: 0;
     opacity: 100%; }
   to {
     bottom: -200px;
@@ -378,7 +381,7 @@ background color: $background_color
   width: 100vw;
   position: absolute;
   left: 0;
-  bottom: 50px;
+  bottom: 0;
   box-sizing: border-box;
   padding: 20px;
   padding-top: 0;

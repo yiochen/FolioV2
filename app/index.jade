@@ -27,9 +27,7 @@ html(lang="en")
         .fullbleed.layout.vertical.unresolved        
             template#app(is="dom-bind")
                 //slow-element
-
                 iron-media-query(query="(min-width: 1000px)",query-matches="{{desktop}}")
-                
                 neon-animated-pages#pages(
                     selected="0",
                     entry-animation="[[entryAnimation]]",
@@ -40,7 +38,7 @@ html(lang="en")
                     include ./_project-misc.jade
                     include ./_aboutme.jade
                 .toolbar 
-                    .toolbar_icon a
+                    img.toolbar_icon(src="images/yioulogo.png")
                     .toolbar_title Yiou Chen
                     #menu_button_container
                         shape-shifter#menu_button(shape="menu",color="#fff",on-tap="_onMenuClick")

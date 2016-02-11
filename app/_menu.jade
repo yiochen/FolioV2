@@ -1,26 +1,9 @@
-//- mixin dialog_inner
-//-     #custom_menu
-//-             .menu_header
-//-                 .menu_title Menu
-//-                 iron-icon#popout_close(icon="close",on-tap="_onMenuClick",style="color:white; cursor: pointer;")
-//- 
-//-             h2 hello there I cant get my icons
-//-             p  is a dialog with Material Design styling and optional animations when it is opened or closed. It provides styles for a header, content area, and an action area for buttons. You can use the <paper-dialog-scrollable> element (in its own repository) if you need a scrolling content area. See Polymer.PaperDialogBehavior for specifics.
-//-             
-//- template(is="dom-if", if="{{!desktop}}")
-//-     paper-dialog#menu_popout(modal, entry-animation="scale-up-animation", exit-animation="slide-up-animation")
-//-         +dialog_inner
-//- template(is="dom-if", if="{{desktop}}")
-//-     paper-dialog#menu_popout(modal, entry-animation="fade-in-animation", exit-animation="fade-out-animation")
-//-         +dialog_inner
-
 .menu_overlay
     .menu_top
     .menu_item(on-tap="_onMenuItemClicked",data-route="main") 
         h1 Home
-    .menu_projects
-        .menu_project_icon(on-tap="_onMenuItemClicked",data-route="project/tmood")  tMood
-        .menu_project_icon(on-tap="_onMenuItemClicked",data-route="project/poster")  Poster
+    .menu_item(on-tap="_onMenuItemClicked",data-route="project/tmood")
+        h1 Projects
     .menu_item
         a(href="http://yiou.me/Blog/")
             h1 Blog

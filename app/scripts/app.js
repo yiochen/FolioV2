@@ -29,7 +29,7 @@ Element.prototype.animateProp = function(prop,dest, duration,callback){
 };
 Element.prototype.one=function (eventList, func, bool) {
     var element=this;
-  console.log('adding event listeners');
+
   function removeAfterFire(e){
       func(e);
       eventList.forEach(function (ev){
@@ -80,20 +80,29 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
     $('.unresolved').classList.remove('unresolved');
     var preloader = $('.preload');
     var navInstr=$('.show_nav');
-    navInstr.style.display='block';
-    addClass(preloader,['animated','fadeOut']);
-    navInstr.one(['animationend'],function(){
-        console.log('finished showing instruction, fading out ');
-        app.init();
-        addClass(navInstr,['animated','fadeOut']);
-        navInstr.one(['animationend'],function(){
-            console.log('show_nav fadeOut ended');
-            removeClass(preloader);
-            removeClass(navInstr);
+    if (isTouchScreen()){
+        navInstr.style.display='block';
+        addClass(preloader,['animated','fadeOut']);
+        navInstr.one(_animationEvent,function(){
+
+            app.init();
+            addClass(navInstr,['animated','fadeOut']);
+            navInstr.one(['animationend'],function(){
+
+                preloader.parentNode.removeChild(preloader);
+                navInstr.parentNode.removeChild(navInstr);
+            });
+        });
+    }else{
+        preloader.one(_animationEvent,function(){
             preloader.parentNode.removeChild(preloader);
             navInstr.parentNode.removeChild(navInstr);
+            app.init();
         });
-    });
+        addClass(preloader,['animated','fadeOut']);
+    }
+
+
     // preloader.parentNode.removeChild(preloader);
     console.log('all elements upgraded, all html imports finished');
 
@@ -110,11 +119,13 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
                 break;
           }
       },false);
+
       projectRoutes.forEach(function (route){
          var page=$('[data-route="' + route+'"]');
+
          if  (page) {
              page.addEventListeners(['mousewheel','DOMMouseScroll'],function(e){
-                 console.log("scroll");
+
                  if (e.wheelDelta <0 && !page.opened){
                      app._onProjectClick();
                  }
@@ -131,9 +142,6 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
               }
           },false);
       }
-
-
-
 
   }
   // Sets app default base URL
@@ -159,19 +167,40 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
   // have resolved and content has been stamped to the page
   app.addEventListener('dom-change', function() {
     console.log('Our app is ready to rock!');
-    var hammertime = new Hammer(app.$.pages);
-    hammertime.get('swipe').set({
-      direction: Hammer.DIRECTION_HORIZONTAL
-    });
-    hammertime.on('swipeleft', function(ev) {
-      console.log('swipeleft');
-      app._onNextClick();
-    });
-    hammertime.on('swiperight', function(ev) {
-      console.log('swiperight');
-      app._onPrevClick();
-    });
-    console.log("added guesture support");
+    if (isTouchScreen()){
+        var hammertime = new Hammer(app.$.pages);
+        hammertime.get('swipe').set({
+          direction: Hammer.DIRECTION_ALL,
+          threshold:5,
+          velocity:0.35
+        });
+        hammertime.on('swipeleft', function(ev) {
+
+          app._onNextClick();
+        });
+        hammertime.on('swiperight', function(ev) {
+
+          app._onPrevClick();
+        });
+        hammertime.on('swipeup',function(ev){
+            //when user try to scroll down
+            var page=app.getCurrentPage();
+            if (app.isProjectPage(page) && !page.opened){
+                app._onProjectClick();
+            }
+            if (app.isAboutPage(page)){
+                app._aboutnext();
+            }
+        });
+        hammertime.on('swipedown',function(ev){
+            var page=app.getCurrentPage();
+            if (app.isAboutPage(page)){
+                app._aboutprev();
+            }
+        })
+
+    }
+
   });
   function initPage(page){
       page.scrollTop=0;
@@ -191,12 +220,30 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
   }
 
   function cleanPage(page){
+      if (page.opened){
+          app._onProjectClick();
+      }
   }
 
   app.getCurrentPage = function(){
       return this.$.pages.children[this.$.pages.selected];
   };
-
+  app.isProjectPage =function (page){
+      var intro=page.querySelector('.project_intro');
+      if (intro){
+          return true;
+      }else{
+          return false;
+      }
+  }
+  app.isAboutPage = function(page){
+      var about=page.querySelector('.about_intro');
+      if (about){
+          return true;
+      }else{
+          return false;
+      }
+  }
   app._onPrevClick = function() {
       if (this.getCurrentPage().opened){return;}
     this.entryAnimation = 'slide-from-left-animation';
@@ -231,6 +278,7 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
     this.entryAnimation = 'fade-in-animation';
     this.exitAnimation = 'fade-out-animation';
     var selected = this.$.pages.selected;
+
     cleanPage(this.$.pages.children[selected]);
 
     var newpage = this._getPageByRoute(route);
@@ -269,9 +317,10 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
       this._onMenuOpen();
     }
   };
+
   app._onProjectClick = function(){
+
       var page=this.getCurrentPage();
-      var detail = page.querySelector('.project_detail');
       if (typeof page.opened === 'undefined' || !page.opened){
           page.opened=true;
           //opening detail
@@ -297,7 +346,7 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
           }else{
               aboutpage.animateProp('scrollTop',dest,1000);
           }
-          
+
       }
   };
   app._aboutprev=function(){
@@ -326,7 +375,7 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
     );
     addClass(removeClass(menu),['animated', 'fadeIn']);
     menu.appendChild($('#menu_button_container'));
-    console.log('animating in');
+
   }
 
   function _menuAnimateOut() {
@@ -335,7 +384,7 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
       function() {
         removeClass(menu);
         menu.style.display = 'none';
-        console.log('animating out');
+
       }
     );
     addClass(removeClass(menu),['animated', 'fadeOut']);
@@ -352,7 +401,7 @@ Element.prototype.addEventListeners=function(eventlist, func, bool){
         $('.overlay_popup').appendChild(detail);
         detail.style.display='block';
         detail.one(_animationEvent,function(e){
-            console.log("animationEnds");
+
             // detail.style.animationPlayState='running';
             detail.style.pointerEvents='all';
         },false);

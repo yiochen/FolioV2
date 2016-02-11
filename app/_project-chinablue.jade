@@ -1,8 +1,8 @@
 neon-animatable(data-route="project/chinablue")
     template(is="dom-if", if="{{!desktop}}")
-        iron-image.project_image(sizing="cover", position="right top", src="images/project/chinablue/posterSum.png")
+        iron-image.project_image(sizing="cover", position="right top", src="images/project/chinablue/posterSum.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
     template(is="dom-if", if="{{desktop}}")
-        iron-image.project_image(sizing="cover", position="center", src="images/project/chinablue/posterSum.png")
+        iron-image.project_image(sizing="cover", position="center", src="images/project/chinablue/posterSum.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
     .gradient_overlay
     .project_intro
         .project_title Design for ChinaBlue
@@ -12,41 +12,21 @@ neon-animatable(data-route="project/chinablue")
             .project_meta_item #[span Place] Stony Brook University
             .project_meta_item #[span Softwares] Photoshop, Illustrator
         .read_more.light_button(on-tap="_onProjectClick") Read More
-            
-    
-    //
-        .project_preview
-            template(is="dom-if", if="{{!desktop}}")
-                img(src="images/tmood_vertical_01.png")
-            template(is="dom-if", if="{{desktop}}")
-                img(src="images/tmood_horizontal_01.png")
-            .gradient_overlay
+
     .project_detail
         
         .container.project_content 
             .project_title Design for ChinaBlue #[shape-shifter(shape="cancel",color="#fff",on-tap="_onProjectClick")]
             h5 I am a designer for a school media club called ChinaBlue. ChinaBlue's mission is to spread awareness of the chinese community to people on campus through events and the media. My responsibility is basically creating event posters, making T-shirt designes and work on other miscellaneous design projects.
-            iron-image(src="images/project/chinablue/chinablue.png")
+            iron-image(src="images/project/chinablue/chinablue.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
             p Flyer for first General Body Meeting(GBM).
-            iron-image(src="images/project/chinablue/Mid-Autumn.png")
+            iron-image(src="images/project/chinablue/Mid-Autumn.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
             p Mid-Autumn festival Flyer.
-            iron-image(src="images/project/chinablue/papercut.png")
+            iron-image(src="images/project/chinablue/papercut.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
             p For a club meeting in which we did paper cutting.
-            iron-image(src="images/project/chinablue/secondgbmlantern.png")
+            iron-image(src="images/project/chinablue/secondgbmlantern.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
             p Lantern making GBM(General Body Meeting)
-            iron-image(src="images/project/chinablue/Radiowithdate.png")
+            iron-image(src="images/project/chinablue/Radiowithdate.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
             p A meeting about the history of ChinaBlue
-            iron-image(src="images/project/chinablue/LunarNewYear.png")
+            iron-image(src="images/project/chinablue/LunarNewYear.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
             p Flyer for the Lunar New Year GBM(General Body Meeting)
-            
-        
-    //
-        .project_footer
-            template(is="dom-if", if="{{!desktop}}")
-                img(src="images/tmood_vertical_02.png")
-            template(is="dom-if", if="{{desktop}}")
-                img(src="images/tmood_vertical_02.png")
-            .gradient_overlay
-            .copyright Copyright &#169;2016 Yiou Chen. All rights reserved.
-        
-            

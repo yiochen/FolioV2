@@ -1,8 +1,8 @@
 neon-animatable(data-route="project/tmood")
     template(is="dom-if", if="{{!desktop}}")
-        iron-image.project_image(sizing="cover", position="right top", src="images/tmood_vertical_01.png")
+        iron-image.project_image(sizing="cover", position="right top", src="images/tmood_vertical_01.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
     template(is="dom-if", if="{{desktop}}")
-        iron-image.project_image(sizing="cover", position="right center", src="images/tmood_horizontal_01.png")
+        iron-image.project_image(sizing="cover", position="right center", src="images/tmood_horizontal_01.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
     .gradient_overlay
     .project_intro
         .project_title tMood
@@ -26,7 +26,7 @@ neon-animatable(data-route="project/tmood")
         .container.project_content 
             .project_title tMood #[shape-shifter(shape="cancel",color="#fff",on-tap="_onProjectClick")]
             h5 TMood is a Pebble smartwatch app developed during Bitcamp (a hackathon hosted by University of Maryland) in a team of four. The goal of this app is to provide people some idea about the mood around them when coming to a new place. We decided to make a watch app. It's our first time trying to make a watch app, however, with the help of Pebble.js and CloudPebble (online pebble IDE and simulator), the development was very smooth and enjoyable.
-            iron-image(src="images/project/tmood/tmood_function.png")
+            iron-image(src="images/project/tmood/tmood_function.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade) 
             h3 What it does
             p When you open this app, tMood will gather tweets in your area and analyze their sentiment level and display the data using a matrix of emojis. Smiley face representing tweets with positive sentiment; sad face representing tweets with negative sentiment. There is neutral face as well. User can navigate using the side buttons of the Pebble and select to read one of the tweets or shake the watch to get a random tweet.
             h3 How we built it

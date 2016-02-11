@@ -1,9 +1,9 @@
 @keyframes showintro{
     from{bottom:-200px;opacity:0;}
-    to{bottom:50px;opacity: 100%}
+    to{bottom:0;opacity: 100%}
 }
 @keyframes hideintro{
-    from{bottom:50px; opacity: 100%;}
+    from{bottom:0; opacity: 100%;}
     to{bottom:-200px; opacity:0;}
 }
 @keyframes showdetail{
@@ -19,7 +19,7 @@
     width:100vw;
     position:absolute;
     left:0;
-    bottom:50px;
+    bottom:0;
     box-sizing: border-box;
     padding:20px;
     padding-top:0;
@@ -81,39 +81,7 @@
     background:$background_color;
     animation-duration: 1s;
 }
-// .project_page {
-//     color: white;
-//     padding-top: 2em;
-//     padding-bottom: 5em;
-// }
-//
-// .project_preview {
-//     background: orange;
-//     height: 75vh;
-//     box-sizing: content-box;
-//     position: relative;
-//     -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%);
-//     clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%);
-//     overflow: hidden;
-// }
-//
-// .project_preview img {
-//     width: 100%;
-// }
-//
-// .project_title {
-//     font-size: 2.5em;
-//     color: white;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     height: 20vh;
-//     transform: translateY(-100%);
-//     text-align: center;
-//     position: absolute;
-//     width: 100%;
-// }
-//
+
 .project_content img {
     width: 100%;
 }
@@ -121,18 +89,3 @@
     width: 100%;
 
 }
-//
-// .project_footer {
-//     height: 25vh;
-//     position: relative;
-//     overflow: hidden;
-//     -webkit-clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-//     clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-// }
-//
-// .project_footer img {
-//     min-width: 100%;
-//     min-height: 100%;
-//     position: absolute;
-//     bottom: 0;
-// }

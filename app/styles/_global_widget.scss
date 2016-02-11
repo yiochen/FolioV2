@@ -44,13 +44,16 @@ $toolbar_height:40px;
     width: 100%;
     /*background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 59%, rgba(0, 0, 0, 0) 100%);*/
     background:transparentize($primary_color, 0.2);
+    display:flex;
+    align-items: center;
 }
 
 .toolbar .toolbar_icon {
+    margin-left:10px;
     color: white;
     float: left;
-    height: 40px;
-    width: 40px;
+    height: $toolbar_height * 0.6;
+    width: $toolbar_height * 0.6;
     display: flex;
     align-items: center;
     justify-content: center;
