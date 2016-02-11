@@ -1,5 +1,5 @@
 var _animationEvent=['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'];
-var projectRoutes=['project/tmood','project/chinablue','project/misc'];
+var projectRoutes=['project/tmood','project/chinablue','project/misc','project/html5','project/flash'];
 function isTouchScreen(){
     return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
 }

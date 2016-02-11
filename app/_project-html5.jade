@@ -1,0 +1,24 @@
+neon-animatable(data-route="project/html5")
+    iron-image.project_image(sizing="cover", position="right", src="images/project/html5/htmlExp.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
+    .gradient_overlay
+    .project_intro
+        .project_title HTML5 Experiment
+        .project_desc Various experiments using cutting edge web technologies.
+        .project_meta
+            .project_meta_item #[span language] HTML, Javascript, CSS
+            .project_meta_item #[span libraries] Three.js, Paper.js, Firebase, etc
+        .read_more.light_button(on-tap="_onProjectClick") Read More
+    .project_detail
+        .container.project_content 
+            .project_title HTML5 Experiment #[shape-shifter(shape="cancel",color="#fff",on-tap="_onProjectClick")]
+            h5 Following are some of the experiments I did using trending libraries.
+            h3 #[a(href="http://yiou.me/Floral/") Floral]
+            p A floral pattern generator using Paper.js. When clicked, it will draw randomly generated spirals.
+            iron-image(src="images/project/html5/floral.jpg",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade) 
+            h3 #[a(href="http://yiou.me/Multidraw/") Multidraw]
+            p A simple online drawing tool that support realtime collaboration.
+            iron-image(src="images/project/html5/multidraw.jpg",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade) 
+            h3 #[a(href="http://yiou.me/Solar3D/") Solar3D]
+            p 3D mini game in the browser using Three.js.
+            iron-image(src="images/project/html5/solar.jpg",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade) 
+            

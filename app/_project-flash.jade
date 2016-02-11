@@ -1,0 +1,21 @@
+neon-animatable(data-route="project/flash")
+    iron-image.project_image(sizing="cover", position="center", src="images/project/flash/flash.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade)
+    .gradient_overlay
+    .project_intro
+        .project_title Flash
+        .project_desc Some old Flash and ActionScript projects.
+        .project_meta
+            .project_meta_item #[span date] Since 2011
+            .project_meta_item #[span language] ActionScript
+            
+        .read_more.light_button(on-tap="_onProjectClick") Read More
+    .project_detail
+        .container.project_content 
+            .project_title Flash #[shape-shifter(shape="cancel",color="#fff",on-tap="_onProjectClick")]
+            h5 Flash was such an awesome technology. It was actually what lead me into the world of Computer Science. I present some of the projects I made in the past below in memory of the fun time I had with it. 
+            iron-image(src="images/project/flash/breakout.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade) 
+            p A breakout game in ActionScript 3. Blocks are auto-generated.
+            iron-image(src="images/project/flash/flashSolar.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade) 
+            p A sound visualizer mimicing the Solar System. It responds to microphone input and performs actions based on the amplitude of the sound.
+            iron-image(src="images/project/flash/partical.png",placeholder="data:image/gif;base64,R0lGODlhAQABAPAAAP+Nh////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",preload,fade) 
+            p A mini game where you control a blackhole to absorb bubbles.
